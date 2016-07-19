@@ -4,7 +4,7 @@ Pokémon GO API in Python
 # Some Info
 1. GitHub issues are mainly for bug reporting.  
 2. One goal of the project is to understand the API and to give other developers a starting point.   
-3. We are discussing the release but there are some problems. One point is the usage of the Pokemon GO API. We dont want Niantic to take action against API usage. There are a lot of nice projects out there build on the API. So please dont blame us about thinking about our actions.
+3. We are discussing the release but there are some problems. One point is the usage of the Pokemon GO API. We dont want Niantic to take action against API usage. There are a lot of nice projects out there built on the API. So please dont blame us about thinking about our actions.
 
 # To-Do:
 - [x] eat more proto..
