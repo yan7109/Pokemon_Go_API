@@ -77,63 +77,65 @@ def catch(maps,local_ses,new_rcp_point):
 		print
 		print '[!] found %s pokemon'%(len(data_list),)
 		for idx, e in enumerate(data_list):
-			print '[!] %s Type:%s its %s m away'%(idx,e[0],e[len(e)-1],)
+			if(e[0] not in config.list_banned_Pokemon): #Banned Pokemon
+				print '[!] %s Type:%s its %s m away'%(idx,e[0],e[len(e)-1],)
 		print 
 		for idx, pok in enumerate(data_list):
-			#print '[!] %s Type:%s its %s m away'%(idx,pok[0],pok[len(pok)-1],)
-			#if pok[0] < 22:
-			if pok[len(pok)-1] < 600:
-				print '[!] Trying to catch Type:%s its %s m away'%(pok[0],round(location.get_distance(location.get_lat(),location.get_lot(),pok[1],pok[2]),3),)
-				lat1=location.l2f(location.get_lat())
-				lot1=location.l2f(location.get_lot())
-				lat2=location.l2f(pok[1])
-				lot2=location.l2f(pok[2])
-				#print location.l2f(lat1),location.l2f(lot1),location.l2f(lat2),location.l2f(lot2)
-				if (lat1>lat2):
-					while(lat1<lat2):
-						lat1=lat1-config.steps
-						location.set_lat(lat1)
-						location.set_lot(lot1)
-						info_prot= logic.get_info(local_ses.ses,pok)
-						tmp_api=api.use_api(new_rcp_point,info_prot)
-						time.sleep(2)
-				else:
-					while(lat1<lat2):
-						lat1=lat1+config.steps
-						location.set_lat(lat1)
-						location.set_lot(lot1)
-						info_prot= logic.get_info(local_ses.ses,pok)
-						tmp_api=api.use_api(new_rcp_point,info_prot)
-						time.sleep(2)
-				if (lot1>lot2):
-					while(lot1>lot2):
-						lot1=lot1-config.steps
-						location.set_lat(lat1)
-						location.set_lot(lot1)
-						info_prot= logic.get_info(local_ses.ses,pok)
-						tmp_api=api.use_api(new_rcp_point,info_prot)
-						time.sleep(2)
-				else:
-					while(lot2>lot1):
-						lot1=lot1+config.steps
-						location.set_lat(lat1)
-						location.set_lot(lot1)
-						info_prot= logic.get_info(local_ses.ses,pok)
-						tmp_api=api.use_api(new_rcp_point,info_prot)
-						time.sleep(2)
-				#catch_prot= logic.catch_it(local_ses.ses,pok)
-				#tmp_api=api.use_api(new_rcp_point,catch_prot)
-				tmp_api=catch_t(local_ses,pok,new_rcp_point)
-				if tmp_api is not None:
-					catch_status = pokemon_pb2.catch_status()
-					catch_status.ParseFromString(tmp_api)
-					if catch_status.sess[0].status:
-						print "[+] catched pok... %s"%(catch_status.sess[0].status,)
-				else:
-					print '[-] catch data is none'
+			if(pok[0] not in config.list_banned_Pokemon): #Banned Pokemon
+				#print '[!] %s Type:%s its %s m away'%(idx,pok[0],pok[len(pok)-1],)
+				#if pok[0] < 22:
+				if pok[len(pok)-1] < 600:
+					print '[!] Trying to catch Type:%s its %s m away'%(pok[0],round(location.get_distance(location.get_lat(),location.get_lot(),pok[1],pok[2]),3),)
+					lat1=location.l2f(location.get_lat())
+					lot1=location.l2f(location.get_lot())
+					lat2=location.l2f(pok[1])
+					lot2=location.l2f(pok[2])
+					#print location.l2f(lat1),location.l2f(lot1),location.l2f(lat2),location.l2f(lot2)
+					if (lat1>lat2):
+						while(lat1<lat2):
+							lat1=lat1-config.steps
+							location.set_lat(lat1)
+							location.set_lot(lot1)
+							info_prot= logic.get_info(local_ses.ses,pok)
+							tmp_api=api.use_api(new_rcp_point,info_prot)
+							time.sleep(2)
+					else:
+						while(lat1<lat2):
+							lat1=lat1+config.steps
+							location.set_lat(lat1)
+							location.set_lot(lot1)
+							info_prot= logic.get_info(local_ses.ses,pok)
+							tmp_api=api.use_api(new_rcp_point,info_prot)
+							time.sleep(2)
+					if (lot1>lot2):
+						while(lot1>lot2):
+							lot1=lot1-config.steps
+							location.set_lat(lat1)
+							location.set_lot(lot1)
+							info_prot= logic.get_info(local_ses.ses,pok)
+							tmp_api=api.use_api(new_rcp_point,info_prot)
+							time.sleep(2)
+					else:
+						while(lot2>lot1):
+							lot1=lot1+config.steps
+							location.set_lat(lat1)
+							location.set_lot(lot1)
+							info_prot= logic.get_info(local_ses.ses,pok)
+							tmp_api=api.use_api(new_rcp_point,info_prot)
+							time.sleep(2)
+					#catch_prot= logic.catch_it(local_ses.ses,pok)
+					#tmp_api=api.use_api(new_rcp_point,catch_prot)
+					tmp_api=catch_t(local_ses,pok,new_rcp_point)
+					if tmp_api is not None:
+						catch_status = pokemon_pb2.catch_status()
+						catch_status.ParseFromString(tmp_api)
+						if catch_status.sess[0].status:
+							print "[+] catched pok... %s"%(catch_status.sess[0].status,)
+					else:
+						print '[-] catch data is none'
+					#exit()
 				#exit()
-			#exit()
-			#walk_random()
+				#walk_random()
 	walk_random()
 		
 def catch_t(local_ses,pok,new_rcp_point):
