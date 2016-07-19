@@ -14,14 +14,14 @@ import login
 import public
 from getpass import getpass
 import public_proto_pb2
-try:
-	import pokemon_pb2
-	import logic
-	import dirty
-	import api
-	config.pub=False
-except:
-	config.pub=True
+#try:
+import pokemon_pb2
+import logic
+import dirty
+import api
+	#config.pub=False
+#except:
+	#config.pub=True
 
 def get_acces_token(usr,pws,type):
 	access_token=None

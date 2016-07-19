@@ -81,6 +81,9 @@ def get_near_p(map):
 				for stop in obj.p:
 					#if distance(stop.lat,stop.lon,COORDS_LATITUDE,COORDS_LONGITUDE):
 					ms.append((stop.t.type,stop.lat,stop.lon,stop.name,stop.hash,get_distance(stop.lat,stop.lon,COORDS_LATITUDE,COORDS_LONGITUDE)))
+				for stop in obj.s:
+					if stop.p.type:
+						ms.append((stop.p.type,stop.lat,stop.lon,stop.name,stop.p.u2,get_distance(stop.lat,stop.lon,COORDS_LATITUDE,COORDS_LONGITUDE)))
 	return ms
 	
 def move_to(lat1, lot1,lat2, lot2):
