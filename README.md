@@ -37,7 +37,7 @@ Features:
 - set distance for farming
 - good logic to prevent bans
 - automatic catching pokemons
-- automaticly farm pokestops 
+- automatically farm pokestops 
 
 # Requirements:
 - python 2.7
