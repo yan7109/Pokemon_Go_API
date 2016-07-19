@@ -1,6 +1,7 @@
 import logic
 import api
 import time
+import datetime
 import pokemon_pb2
 import location
 import json
@@ -130,7 +131,7 @@ def catch(maps,local_ses,new_rcp_point):
 						catch_status = pokemon_pb2.catch_status()
 						catch_status.ParseFromString(tmp_api)
 						if catch_status.sess[0].status:
-							print "[+] catched pok... %s"%(catch_status.sess[0].status,)
+							print "[+] " + datetime.datetime.now().strftime("%H:%M:%S")+ " catched pok... %s"%(catch_status.sess[0].status,)
 					else:
 						print '[-] catch data is none'
 					#exit()
@@ -242,13 +243,13 @@ def work_with_stops(current_stop,ses,new_rcp_point):
 			if map.sess[0].amt is not None:
 				config.earned_xp+=map.sess[0].amt
 			if st==4:
-				print "[!] bag full +%s (%s)"%(map.sess[0].amt,config.earned_xp)
+				print "[!] " + datetime.datetime.now().strftime("%H:%M:%S") + " bag full +%s (%s)"%(map.sess[0].amt,config.earned_xp)
 			elif st==3:
-				print "[!] cooldown"
+				print "[!] " + datetime.datetime.now().strftime("%H:%M:%S")+ " cooldown"
 			elif st==2:
-				print "[!] charging"
+				print "[!] " + datetime.datetime.now().strftime("%H:%M:%S")+ " charging"
 			elif st==1:
-				print "[!] +%s (%s)"%(map.sess[0].amt,config.earned_xp)
+				print "[!] " + datetime.datetime.now().strftime("%H:%M:%S")+ " +%s (%s)"%(map.sess[0].amt,config.earned_xp)
 				#work_with_stops(current_stop,ses,new_rcp_point)
 			else:
 				print "[?]:",st
