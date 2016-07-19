@@ -10,7 +10,7 @@ Pokémon GO API in Python
 - [x] catch pokemons
 - [x] drop items 
 - [ ] drop low cp pokemon
-- [ ] Pokemon filter
+- [x] Pokemon filter
 - [ ] incubate eggs
 - [ ] evolve pokemons
 - [ ] use candy
