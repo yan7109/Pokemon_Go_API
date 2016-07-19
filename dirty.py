@@ -9,6 +9,7 @@ from multiprocessing import Process
 
 multi=False
 show_pok=True
+try_item=True
 
 def start_private_show(access_token,ltype,loc):
 	#try:
@@ -19,9 +20,10 @@ def start_private_show(access_token,ltype,loc):
 	try:
 		new_rcp_point='https://%s/rpc'%(local_ses.rpc_server,)
 	except:
+		print '[-] rpc bad'
 		start_private_show(access_token,ltype,loc)
-	while(True):
-		work_stop(local_ses,new_rcp_point)
+	#while(True):
+	work_stop(local_ses,new_rcp_point)
 	#except:
 	#	start_private_show(access_token,ltype,loc)
 		
@@ -57,85 +59,92 @@ def work_stop(local_ses,new_rcp_point):
 	try:
 		maps.ParseFromString(all_stops)
 	except:
+		print '[-] mad bad'
 		work_stop(local_ses,new_rcp_point)
-	if show_pok:
-		data_list=location.get_near_p(maps)
-		if len(data_list)>0:
-			print '[!] found %s pokemon near you'%(len(data_list),)
-			for idx, pok in enumerate(data_list):
-				print '[!] %s Type:%s its %s m away'%(idx,pok[0],pok[len(pok)-1],)
-				#if pok[0] < 22:
-				#if pok[len(pok)-1] < 45:
-				lat1=location.l2f(location.get_lat())
-				lot1=location.l2f(location.get_lot())
-				lat2=location.l2f(pok[1])
-				lot2=location.l2f(pok[2])
-				#print location.l2f(lat1),location.l2f(lot1),location.l2f(lat2),location.l2f(lot2)
-				if (lat1>lat2):
-					while(lat1<lat2):
-						lat1=lat1-0.000095
-						location.set_lat(lat1)
-						location.set_lot(lot1)
-						info_prot= logic.get_info(local_ses.ses,pok)
-						tmp_api=api.use_api(new_rcp_point,info_prot)
-						time.sleep(2)
-				else:
-					while(lat1<lat2):
-						lat1=lat1+0.000095
-						location.set_lat(lat1)
-						location.set_lot(lot1)
-						info_prot= logic.get_info(local_ses.ses,pok)
-						tmp_api=api.use_api(new_rcp_point,info_prot)
-						time.sleep(2)
-				if (lot1>lot2):
-					while(lot1>lot2):
-						lot1=lot1-0.000095
-						location.set_lat(lat1)
-						location.set_lot(lot1)
-						info_prot= logic.get_info(local_ses.ses,pok)
-						tmp_api=api.use_api(new_rcp_point,info_prot)
-						time.sleep(2)
-				else:
-					while(lot2>lot1):
-						lot1=lot1+0.000095
-						location.set_lat(lat1)
-						location.set_lot(lot1)
-						info_prot= logic.get_info(local_ses.ses,pok)
-						tmp_api=api.use_api(new_rcp_point,info_prot)
-						time.sleep(2)
-				catch_prot= logic.catch_it(local_ses.ses,pok)
-				tmp_api=api.use_api(new_rcp_point,catch_prot)
-				print "[+] catched pok..."
-				#else:
-				#	print '[-] too far away'
-				#exit()
-				walk_random()
-		walk_random()
-		time.sleep(2)
+	if try_item:
+		print '[+] deleting 9 pokeballs'
+		info_prot= logic.delete_items(local_ses.ses,1,9)
+		tmp_api=api.use_api(new_rcp_point,info_prot)
+		exit()
 	else:
-		data_list=location.get_near(maps)
-		data_list = sorted(data_list, key = lambda x: x[1])
-		if len(data_list)>0:
-			print '[+] found: %s Pokestops near you'%(len(data_list),)
-			if local_ses is not None and data_list is not None:
-				print '[+] starting show'
-				if multi:
-					a,b=split_list(data_list)
-					p = Process(target=work_half_list, args=(a,local_ses.ses,new_rcp_point))
-					o = Process(target=work_half_list, args=(a,local_ses.ses,new_rcp_point))
-					p.start()
-					o.start()
-					p.join()
-					o.join()
-					print '[!] farming done..'
-				else:
-					for t in data_list:
-						if config.debug:
-							print '[!] farming pokestop..'
-						work_with_stops(t,local_ses.ses,new_rcp_point)
-		else:
+		if show_pok:
+			data_list=location.get_near_p(maps)
+			if len(data_list)>0:
+				print '[!] found %s pokemon near you'%(len(data_list),)
+				for idx, pok in enumerate(data_list):
+					print '[!] %s Type:%s its %s m away'%(idx,pok[0],pok[len(pok)-1],)
+					#if pok[0] < 22:
+					#if pok[len(pok)-1] < 45:
+					lat1=location.l2f(location.get_lat())
+					lot1=location.l2f(location.get_lot())
+					lat2=location.l2f(pok[1])
+					lot2=location.l2f(pok[2])
+					#print location.l2f(lat1),location.l2f(lot1),location.l2f(lat2),location.l2f(lot2)
+					if (lat1>lat2):
+						while(lat1<lat2):
+							lat1=lat1-0.000095
+							location.set_lat(lat1)
+							location.set_lot(lot1)
+							info_prot= logic.get_info(local_ses.ses,pok)
+							tmp_api=api.use_api(new_rcp_point,info_prot)
+							time.sleep(2)
+					else:
+						while(lat1<lat2):
+							lat1=lat1+0.000095
+							location.set_lat(lat1)
+							location.set_lot(lot1)
+							info_prot= logic.get_info(local_ses.ses,pok)
+							tmp_api=api.use_api(new_rcp_point,info_prot)
+							time.sleep(2)
+					if (lot1>lot2):
+						while(lot1>lot2):
+							lot1=lot1-0.000095
+							location.set_lat(lat1)
+							location.set_lot(lot1)
+							info_prot= logic.get_info(local_ses.ses,pok)
+							tmp_api=api.use_api(new_rcp_point,info_prot)
+							time.sleep(2)
+					else:
+						while(lot2>lot1):
+							lot1=lot1+0.000095
+							location.set_lat(lat1)
+							location.set_lot(lot1)
+							info_prot= logic.get_info(local_ses.ses,pok)
+							tmp_api=api.use_api(new_rcp_point,info_prot)
+							time.sleep(2)
+					catch_prot= logic.catch_it(local_ses.ses,pok)
+					tmp_api=api.use_api(new_rcp_point,catch_prot)
+					print "[+] catched pok..."
+					#else:
+					#	print '[-] too far away'
+					#exit()
+					walk_random()
 			walk_random()
-			work_stop(local_ses,new_rcp_point)
+			time.sleep(2)
+		else:
+			data_list=location.get_near(maps)
+			data_list = sorted(data_list, key = lambda x: x[1])
+			if len(data_list)>0:
+				print '[+] found: %s Pokestops near you'%(len(data_list),)
+				if local_ses is not None and data_list is not None:
+					print '[+] starting show'
+					if multi:
+						a,b=split_list(data_list)
+						p = Process(target=work_half_list, args=(a,local_ses.ses,new_rcp_point))
+						o = Process(target=work_half_list, args=(a,local_ses.ses,new_rcp_point))
+						p.start()
+						o.start()
+						p.join()
+						o.join()
+						print '[!] farming done..'
+					else:
+						for t in data_list:
+							if config.debug:
+								print '[!] farming pokestop..'
+							work_with_stops(t,local_ses.ses,new_rcp_point)
+			else:
+				walk_random()
+				work_stop(local_ses,new_rcp_point)
 		
 def work_with_stops(current_stop,ses,new_rcp_point):
 	Kinder= logic.gen_stop_data(ses,current_stop)
