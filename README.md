@@ -7,8 +7,14 @@ Pokémon GO API in Python
 - [x] login over google + token
 - [x] run to pokestops
 - [x] human run logic
-- [ ] clean code
 - [x] catch pokemons
+- [x] drop items 
+- [ ] drop low cp pokemon
+- [ ] Pokemon filter
+- [ ] incubate eggs
+- [ ] evolve pokemons
+- [ ] use candy
+- [ ] clean code
 - [ ] fully automate this script
 
 # Preview:
