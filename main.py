@@ -14,14 +14,14 @@ import login
 import public
 from getpass import getpass
 import public_proto_pb2
-try:
-	import pokemon_pb2
-	import logic
-	import dirty
-	import api
-	config.pub=False
-except:
-	config.pub=True
+#try:
+import pokemon_pb2
+import logic
+import dirty
+import api
+	#config.pub=False
+#except:
+	#config.pub=True
 
 def get_acces_token(usr,pws,type):
 	access_token=None
@@ -31,13 +31,12 @@ def get_acces_token(usr,pws,type):
 		google_data=None
 		if platform.system() == 'Windows':
 			google_data= login.login_google(usr,pws)
+			if google_data is not None:
+				access_token=google_data['id_token']
 		else:
-			google_data= login.login_google_v2(usr,pws)
-		if google_data is not None:
-			access_token=google_data['id_token']
+			access_token= login.login_google_v2(usr,pws)
+		if access_token is not None:
 			ltype='google'
-		else:
-			access_token=None
 	else:
 		print '[!] I am a poketrainer..'
 		access_token= login.login_pokemon(usr,pws)
