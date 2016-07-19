@@ -45,6 +45,7 @@ Features:
 - protobuf
 - geopy
 - s2sphere
+- gpsoauth (unix)
 
 # Credits:
 - Mila432

@@ -28,7 +28,11 @@ def get_acces_token(usr,pws,type):
 	ltype=None
 	if 'goo' in type:
 		print '[!] Using google as login..'
-		google_data= login.login_google(usr,pws)
+		google_data=None
+		if platform.system() == 'Windows':
+			google_data= login.login_google(usr,pws)
+		else:
+			google_data= login.login_google_v2(usr,pws)
 		if google_data is not None:
 			access_token=google_data['id_token']
 			ltype='google'
@@ -74,4 +78,5 @@ def main():
 		print '[!] used type "%s" only Google or PTC valid'%(args.type.lower())
 	
 if __name__ == '__main__':
+	sys.dont_write_bytecode = True
 	main()
