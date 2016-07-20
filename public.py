@@ -40,7 +40,7 @@ def start_work(access_token,ltype,loc):
 			print('[+] Username: {}'.format(profile.username))
 
 			creation_time = datetime.fromtimestamp(int(profile.creation_time)/1000)
-			print('[+] You are playing Pokemon Go since: {}'.format(
+			print('[+] You have been playing Pokemon Go since: {}'.format(
 				creation_time.strftime('%Y-%m-%d %H:%M:%S'),
 			))
 			print('[+] Poke Storage: {}'.format(profile.poke_storage))
