@@ -7,20 +7,23 @@ Pokémon GO API in Python
 3. We are discussing the release but there are some problems. One point is the usage of the Pokemon GO API. We dont want Niantic to take action against API usage. There are a lot of nice projects out there built on the API. So please dont blame us about thinking about our actions.
 
 # To-Do:
-- [x] eat more proto..
-- [x] login as pokemon trainer + token
-- [x] login over google + token
-- [x] run to pokestops
-- [x] human run logic
-- [x] catch pokemon
-- [x] drop items 
-- [ ] drop low cp pokemon
-- [x] Pokemon filter
-- [ ] incubate eggs
-- [ ] evolve pokemons
-- [ ] use candy
-- [ ] clean code
-- [ ] fully automate this script
+- [x] Eat moro Protobuf..
+- [x] Login as pokemon trainer + token
+- [x] Login over google + token
+- [x] Run to pokestops
+- [x] Farm specific area for pokestops
+- [x] Human walking logic
+- [x] Catch Pokemon automatically
+- [x] Drop items when bag is full
+- [x] Scan your inventar for XYZ CP pokemon and release them
+- [x] Pokemon catch filter
+- [x] Hatch eggs
+- [ ] Incubate eggs
+- [ ] Evolve pokemons
+- [ ] Use candy
+- [ ] Clean code
+- [x] Fully automate this script
+- [ ] Make v1.0 public!
 
 # Preview:
 
