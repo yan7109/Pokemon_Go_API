@@ -62,7 +62,8 @@ def main():
 		config.distance=args.distance
 		access_token,ltype=get_acces_token(args.username,args.password,args.type.lower())
 		if access_token is not None:
-			print '[!] using:',config.pub
+			if config.debug:
+				print '[!] using:',config.pub
 			if config.pub:
 				public.start_work(access_token,ltype,args.location)
 			else:
