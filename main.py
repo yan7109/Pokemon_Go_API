@@ -12,6 +12,8 @@ import sys
 import config
 import login
 import public
+from getpass import getpass
+import public_proto_pb2
 try:
 	import pokemon_pb2
 	import logic
@@ -20,7 +22,6 @@ try:
 	import api
 	config.pub=False
 except:
-	import public_proto_pb2
 	config.pub=True
 
 def get_acces_token(usr,pws,type):
@@ -43,19 +44,29 @@ def get_acces_token(usr,pws,type):
 def main():
 	if 'nux' not in platform.system():
 		os.system("title Pokemon GO API Python")
+		os.system("cls")
+	else:
+		os.system("clear")
 	parser = argparse.ArgumentParser()
-	parser.add_argument("-u", "--username", help="Login", required=True)
-	parser.add_argument("-p", "--password", help="Password", required=True)
+	parser.add_argument("-u", "--username", help="Login", default=None)
+	parser.add_argument("-p", "--password", help="Password", default=None)
 	parser.add_argument("-t", "--type", help="Google/PTC", required=True)
+	parser.add_argument("-l", "--location", help="Location", required=True)
+	parser.add_argument("-d", "--distance", help="Distance", required=True)
 	args = parser.parse_args()
+	if not args.username:
+		args.username = getpass("Username: ")
+	if not args.password:
+		args.password = getpass("Password: ")
 	if 'ptc' in args.type.lower() or 'goo' in args.type.lower():
+		config.distance=args.distance
 		access_token,ltype=get_acces_token(args.username,args.password,args.type.lower())
 		if access_token is not None:
 			print '[!] using:',config.pub
 			if config.pub:
-				public.start_work(access_token,ltype)
+				public.start_work(access_token,ltype,args.location)
 			else:
-				dirty.start_private_show(access_token,ltype)
+				dirty.start_private_show(access_token,ltype,args.location)
 		else:
 			print '[-] access_token bad'
 	else:

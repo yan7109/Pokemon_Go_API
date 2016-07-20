@@ -3,7 +3,6 @@ import pokemon_pb2
 import time
 import requests
 import logic
-import stops
 
 local_ses=None
 tmp_api=None
