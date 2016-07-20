@@ -25,7 +25,7 @@ Pokémon GO API in Python
 - [x] Fully automate this script
 - [ ] Make v1.0 public!
 
-i no longer have time for this project, once i have the hype is over and nobody needs this files, do your best .. files are old backups that are working but in need of many bug fixes 
+i no longer have time for this project, once i have the hype is over and nobody needs this files, do your best .. files are old backups that are working but in need of many bug fixes. should be only touched by users who know how to fix UGLY, sometimes it works ... sometimes its not :)
 
 if you want the final version that is stable and has all features ^ please contact pokemon [at] mila432.xyz
 

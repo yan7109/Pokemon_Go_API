@@ -1,5 +1,6 @@
 import config
 import pokemon_pb2
+import public_proto_pb2
 import time
 import requests
 import logic
@@ -12,7 +13,27 @@ def use_api(target_api,prot1):
 		if config.debug:
 			print '[!] using api:',target_api
 		r=config.s.post(target_api,data=prot1,verify=False)
-		return r.content
+		if r.status_code==200:
+			return r.content
+		else:
+			print '[-] error code %s'%(r.status_code)
+			return use_api(target_api,prot1)
+	except:
+		print '[!] repeat use_api'
+		time.sleep(3)
+		return use_api(target_api,prot1)
+		
+def use_api_p(target_api,prot1):
+	try:
+		if config.debug:
+			print '[!] using api:',target_api
+		r=config.s.post(target_api,data=prot1,verify=False)
+		if r.status_code==200:
+			p_ret = public_proto_pb2.ResponseEnvelop()
+			p_ret.ParseFromString(r.content)
+			return p_ret
+		else:
+			return use_api(target_api,prot1)
 	except:
 		print '[!] repeat use_api'
 		time.sleep(3)
@@ -22,14 +43,17 @@ def get_rpc_server(access_token,first_data):
 	try:				
 		r=config.s.post(config.api_url,data=first_data,verify=False,timeout=3)
 		get_session_data = pokemon_pb2.get_session_data()
-		get_session_data.ParseFromString(r.content)
+		try:
+			get_session_data.ParseFromString(r.content)
+		except:
+			return get_rpc_server(access_token,first_data)	
 		if get_session_data is not None and get_session_data.rpc_server is not None:
 			if 'plfe' in get_session_data.rpc_server:
 				return get_session_data
 			else:
-				get_rpc_server(access_token,first_data)	
+				return get_rpc_server(access_token,first_data)	
 		else:
-			get_rpc_server(access_token,first_data)
+			return get_rpc_server(access_token,first_data)
 	except requests.exceptions.RequestException as e:
 		print '[-] offline..'
 		time.sleep(3)
