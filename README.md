@@ -21,13 +21,13 @@ Pokémon GO API in Python
 - [ ] Incubate eggs
 - [ ] Evolve pokemons
 - [ ] Use candy
-- [ ] Clean code
+- [x] Clean code
 - [x] Fully automate this script
 - [ ] Make v1.0 public!
 
-i no longer have time for this project, once i have the hype is over and nobody needs this files, do your best .. files are old backups that are working but in need of many bug fixes. should be only touched by users who know how to fix UGLY, sometimes it works ... sometimes its not :)
+i no longer have time for this project, once i have the hype is over and nobody needs this files, do your best .. files are old backups that are working but in need of many bug fixes. should be only touched by users who know how to fix UGLY, sometimes it works ... sometimes its not :)
 
-if you want the final version that is stable and has all features ^ please contact pokemon [at] mila432.xyz
+~~if you want the final version that is stable and has all features ^ please contact pokemon [at] mila432.xyz~~ i will publish a website soon where you can test this bot 
 
 # Preview:
 
