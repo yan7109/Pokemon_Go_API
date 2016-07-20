@@ -3,15 +3,6 @@ import config
 import json
 import re
 from collections import OrderedDict
-try:
-	from gpsoauth import perform_master_login, perform_oauth
-except:
-	print '[!] only google_login_v1'
-
-AID = '9774d56d682e549c'
-SVC= 'audience:server:client_id:848232511240-7so421jotr2609rmqakceuu1luuq0ptb.apps.googleusercontent.com'
-APP = 'com.nianticlabs.pokemongo'
-CSG = '321187995bc7cdc2b5fc91b11a96e2baa8602c62'
 
 def login_pokemon(user,passw):
 	print '[!] doing login for:',user
@@ -39,11 +30,6 @@ def login_pokemon(user,passw):
 	except:
 		print '[-] pokemon attacking the login server'
 		return None
-	
-def login_google_v2(email,passw):
-	r1 = perform_master_login(email, passw, AID)
-	r2 = perform_oauth(email, r1.get('Token', ''), AID, SVC, APP, CSG)
-	return r2['Auth']
 	
 def login_google(email,passw):
 	try:
