@@ -16,7 +16,10 @@ steps=0.000095
 google=True
 pub=None
 earned_xp=0
-use_powerball=False
+use_powerball=True
+
+#You can also make a whitelist
+list_banned_Pokemon = [10, 11, 13, 14, 16, 17, 19, 20, 21, 41, 43, 46, 69, 98, 118] #Poxedex ID
 #values end
 
 #session

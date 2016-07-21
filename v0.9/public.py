@@ -40,7 +40,7 @@ def start_work(access_token,ltype,loc):
 			print('[+] Username: {}'.format(profile.username))
 
 			creation_time = datetime.fromtimestamp(int(profile.creation_time)/1000)
-			print('[+] You are playing Pokemon Go since: {}'.format(
+			print('[+] You have been playing Pokemon Go since: {}'.format(
 				creation_time.strftime('%Y-%m-%d %H:%M:%S'),
 			))
 			print('[+] Poke Storage: {}'.format(profile.poke_storage))
@@ -71,7 +71,7 @@ def set_location(location_name):
 		set_location_coords(loc.latitude, loc.longitude, loc.altitude)
 	except:
 		print '[-] error in set_location'
-		set_location(location_name)
+		exit()
 
 def set_location_coords(lat, long, alt):
 	global COORDS_LATITUDE, COORDS_LONGITUDE, COORDS_ALTITUDE
